@@ -16,12 +16,16 @@ const Navbar = () => {
   return (
     <div className='flex justify-between bg-gray-200 w-full p-4'>
       <h1 className='text-center text-2xl font-bold'>
-        Firebase Google Auth & Context
+        Todo-List
       </h1>
+      <p>{user?.displayName}</p>
       {user?.displayName ? (
         <button onClick={handleSignOut}>Logout</button>
       ) : (
-        <Link to='/signin'>Sign in</Link>
+        <div style={{padding:'10px'}}>
+        <Link to='/' style={{padding:'10px'}}>Home</Link>
+        <Link to='/signin' style={{padding:'10px'}}>Sign in</Link>
+        </div>
       )}
     </div>
   );
