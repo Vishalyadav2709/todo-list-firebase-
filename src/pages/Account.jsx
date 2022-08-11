@@ -8,22 +8,24 @@ import AddIcon from "@mui/icons-material/Add";
 import { uid } from "uid";
 import { auth, db } from "../firebase.js";
 import { set, ref, onValue, update, remove } from "firebase/database";
+import "./Account.css"
+
 
 const Account = () => {
   const [todo, setTodo] = useState("");
   const [todos, setTodos] = useState([]);
-  const { logOut, user } = UserAuth();
+  const {  user } = UserAuth();
   const [isEdit, setIsEdit] = useState(false);
   const [tempUidd, setTempUidd] = useState("");
   const navigate = useNavigate();
 
-  const handleSignOut = async () => {
-    try {
-      await logOut();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleSignOut = async () => {
+  //   try {
+  //     await logOut();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
@@ -73,17 +75,26 @@ const Account = () => {
   };
 
   return (
-    <div className='w-[300px] m-auto'>
-      <h1 className='text-center text-2xl font-bold pt-12'>Let's List Your Todo's</h1>
+    <div className='w-[300px] m-auto account'>
+      <h1 className='heading'>Let's List Your Todo's</h1>
       <div>
-        <p>Welcome, {user?.displayName}</p>
+        <p className='name'>Welcome, {user?.displayName}</p>
       </div>
-      
-      <input type='text' placeholder='Add todo...' value={todo} onChange={(e)=> setTodo(e.target.value)}></input>
-      <AddIcon onClick={writeToDatabase} className="add-confirm-icon" />
+      <div className='inputadd'>
+      <input type='text' placeholder='Add todo...' value={todo} onChange={(e)=> setTodo(e.target.value)} className='input'></input>
+      {isEdit ? (
+       
+        <CheckIcon onClick={handleEditConfirm} className="add-confirm-icon" style={{height:'58px' ,fontSize:'36px'}}/>
+        
+      ) : (
+        
+         <AddIcon onClick={writeToDatabase} className="add-confirm-icon" style={{height:'58px' ,fontSize:'36px'}} />
+        
+      )}
+      </div>
       {todos.map((todo) => (
-        <div>
-          <h1>{todo.todo}</h1>
+        <div className='todo-items'>
+          <h1 className='todo-item'>{todo.todo}</h1>
           
           <EditIcon
           fontSize="large"
@@ -98,15 +109,15 @@ const Account = () => {
         </div>
           ))}
       {/* <button onClick={writeToDatabase}>Add</button> */}
-      {isEdit ? (
+      {/* {isEdit ? (
         <div>
         <CheckIcon onClick={handleEditConfirm} className="add-confirm-icon"/>
         </div>
       ) : (
         <div>
-         
+         <AddIcon onClick={writeToDatabase} className="add-confirm-icon" />
         </div>
-      )}
+      )} */}
     </div>
   );
 };
