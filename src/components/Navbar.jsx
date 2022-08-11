@@ -15,7 +15,7 @@ const Navbar = () => {
 
   return (
     <div className='flex justify-between bg-gray-200 w-full p-4'>
-      <h1 className='text-center text-2xl font-bold'>
+      <h1 className='text-center text-2xl font-bold' style={{marginTop:'9px'}}>
         Todo-List
       </h1>
       <p style={{fontWeight:'bold'}}>{user?.displayName}</p>
