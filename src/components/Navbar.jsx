@@ -18,13 +18,13 @@ const Navbar = () => {
       <h1 className='text-center text-2xl font-bold'>
         Todo-List
       </h1>
-      <p>{user?.displayName}</p>
+      <p style={{fontWeight:'bold'}}>{user?.displayName}</p>
       {user?.displayName ? (
-        <button onClick={handleSignOut}>Logout</button>
+        <button onClick={handleSignOut} style={{paddingRight:'30px' , fontWeight:'bold',fontSize:'20px'}}>Logout</button>
       ) : (
         <div style={{padding:'10px'}}>
-        <Link to='/' style={{padding:'10px'}}>Home</Link>
-        <Link to='/signin' style={{padding:'10px'}}>Sign in</Link>
+        <Link to='/' style={{padding:'10px' , fontSize:'20px'}}>Home</Link>
+        <Link to='/signin' style={{padding:'10px' , fontSize:'20px'}}>Sign in</Link>
         </div>
       )}
     </div>
